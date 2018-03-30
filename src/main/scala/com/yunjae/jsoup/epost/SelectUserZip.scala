@@ -4,13 +4,15 @@ package com.yunjae.jsoup.epost
 import slick.jdbc.GetResult
 import slick.jdbc.MySQLProfile.api._
 
-import scala.concurrent.{Await, ExecutionContext}
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.duration._
 
 /**
   * Created by USER on 2018-03-23.
   */
 class SelectUserZip {
+  def getQueryUserZip(value: Any) = ???
+
   // 데이터 베이스 설정(application.conf)
   val db = Database.forConfig("posmall")
   // Timeout 시간 지정
@@ -31,10 +33,11 @@ class SelectUserZip {
     * @return
     */
   def getQueryUserZip(): Vector[User] = {
+
     //implicit val getUserResult = GetResult(r => User(r.nextInt, r.nextString, r.nextString, Option(r.nextString)))
     implicit val getUserResult = GetResult(r => User(r.<<, r.<<, r.<<, Option(r.<<)))
 
-    val query = db.run(sql"SELECT MEM_NO, ZIP_NO, ADDR1, NEW_ZIP_NO FROM  TMP_USER_CONVER_ZIP".as[User])
+    val query: Future[scala.Vector[User]] = db.run(sql"SELECT MEM_NO, ZIP_NO, ADDR1, NEW_ZIP_NO FROM  TMP_USER_CONVER_ZIP".as[User])
 
     Await.result(query, timeout)
   }

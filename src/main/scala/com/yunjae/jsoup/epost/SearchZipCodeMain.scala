@@ -5,6 +5,8 @@ import java.net.URLEncoder
 import scala.collection.JavaConverters._
 import org.jsoup._
 
+import scala.util.{Failure, Success}
+
 /**
   * Created by USER on 2018-03-23.
   */
